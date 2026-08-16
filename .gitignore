@@ -1,0 +1,14 @@
+# Личные локальные данные — не публиковать
+data/user_state.json
+data/*.backup.json
+marketing_pro_backup_*.json
+
+# Системные и временные файлы
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db
+*.log
+
+# Архивы сборок создаются вне репозитория
+*.zip
