@@ -3717,11 +3717,11 @@ const knowledgeMap={
 }
 let knowledgeBack=null
 function formulaAnchor(name){return 'formula-'+String(name||'').toLowerCase().replace(/[^a-zа-яё0-9]+/gi,'-')}
-function markFormulaAnchor(){if(typeof calculator!=='undefined'&&calculator&&formulas[activeFormula])calculator.id=formulaAnchor(formulas[activeFormula][0])}
+function markFormulaAnchor(){let el=document.getElementById('calculator');if(el&&formulas[activeFormula])el.dataset.formulaAnchor=formulaAnchor(formulas[activeFormula][0])}
 const renderFormulasKnowledge=renderFormulas
 renderFormulas=function(){renderFormulasKnowledge();markFormulaAnchor()}
 function knowledgePageTitle(id){let page=document.getElementById(id);return page?.querySelector('h1,h2')?.textContent?.trim()||id}
-function knowledgeTarget(page,anchor){return document.getElementById(anchor)||document.getElementById(page)}
+function knowledgeTarget(page,anchor){let target=document.getElementById(anchor);if(!target&&page==='formulas'){let calculator=document.getElementById('calculator');if(calculator?.dataset.formulaAnchor===anchor)target=calculator}return target||document.getElementById(page)}
 function showKnowledgeReturn(){let bar=document.getElementById('knowledgeReturn');if(bar)bar.classList.toggle('show',!!knowledgeBack)}
 function openKnowledge(page,anchor,title,formulaName,remember=true){
  if(remember&&state.lastPage!==page)knowledgeBack={page:state.lastPage,scroll:scrollY,title:knowledgePageTitle(state.lastPage)}
